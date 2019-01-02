@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learning Vuejs - Loading data asynchrounously</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+          <img :src="imgSrc" :title="imgTitle" :alt="imgTitle" />
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        var apikey = "tPTfq7J7yv3rbpmxhHndsyUgsnLHv9z0RDnfhRPW";
+        var url = "https://api.nasa.gov/planetary/apod?api_key=" + apikey;
+        //View model
+        var vm = new Vue ({
+        el: '#app',
+        data: {
+          imgSrc: '',
+          imgTitle: ''
+        }
+        });
+        axios.get(url)
+          .then(function(res){
+            vm.imgSrc = res.data.url;
+            vm.imgTitle = res.data.title;
+            // console.clear();
+            // console.log(res);
+          })
+    </script>
+</body>
+</html>
+
+<!--
+  Resources:
+  https://api.nasa.gov
+  https://github.com/axios/axios
+
+-->

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Learning Vuejs</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <!-- <form v-show="!submitted" class="mt-5"> -->
+            <form v-if="!submitted" class="mt-5">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    
+                    <!-- 1 way data binding -->
+                    <!-- <input type="email" v-bind:value="email" class="form-control form-control-lg" /> -->
+                    <!-- <input type="email" :value="email" class="form-control form-control-lg" /> -->
+
+                    <!-- 2 way data binding -->
+                    <input type="email" v-model="email" class="form-control form-control-lg" />
+                    
+                </div>
+                <!-- On click call process() method and event.preventDefault()-->
+                <!-- <button type="submit" v-on:click.prevent="process" class="btn btn-primary">Submit</button> -->
+                <button type="submit" @click.prevent="process" class="btn btn-primary">Submit</button>
+            </form>
+
+            <!-- <h2 v-show="submitted" v-cloak class="mt-5">Thank you for signing up!</h2> -->
+            <!-- <h2 v-if="submitted" class="mt-5">Thank you for signing up!</h2> -->
+            <h2 v-else class="mt-5">Thank you for signing up!</h2>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script>
+        //View model
+        var vm = new Vue ({
+        el: '#app',
+        data: {
+            email: 'hhuynh@ggc.edu',
+            submitted: false
+        },
+        methods: {
+            process: function(event){
+            // event.preventDefault();
+            alert("Process: " + this.email);
+            this.submitted = true;
+            }
+        }
+        });
+    </script>
+</body>
+</html>
